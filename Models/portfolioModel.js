@@ -10,7 +10,7 @@ const introSchema = new mongoose.Schema({
     required: true,
   },
   lastName: {
-    typr: String,
+    type: String,
     required: true,
   },
   caption: {
@@ -47,7 +47,7 @@ const experienceSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  Period: {
+  period: {
     type: String,
     required: true,
   },
@@ -61,7 +61,7 @@ const experienceSchema = new mongoose.Schema({
   },
 });
 
-const projecSchema = new mongoose.Schema({
+const projectSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -103,6 +103,6 @@ module.exports = {
   Intro: mongoose.model("intros", introSchema),
   About: mongoose.model("abouts", aboutSchema),
   Experience: mongoose.model("experience", experienceSchema),
-  Projects: mongoose.model("projects", projecSchema),
+  Project: mongoose.model("projects", projectSchema),
   Contact: mongoose.model("contacts", contactSchema),
 };
