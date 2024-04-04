@@ -6,6 +6,8 @@ const {
   Experience,
   Contact,
 } = require("../Models/portfolioModel");
+
+const Admin = require("../Models/adminModel");
 // get all portfolio data
 router.get("/get-portfolio-data", async (req, res) => {
   try {
@@ -105,13 +107,11 @@ router.post("/update-experience", async (req, res) => {
 router.post("/delete-experience", async (req, res) => {
   try {
     const experience = await Experience.findOneAndDelete({ _id: req.body._id });
-    res
-      .status(200)
-      .send({
-        data: experience,
-        success: true,
-        message: "Experience deleted successfullly",
-      });
+    res.status(200).send({
+      data: experience,
+      success: true,
+      message: "Experience deleted successfullly",
+    });
   } catch {
     res.status(500).send(error.message);
   }
@@ -152,7 +152,6 @@ router.post("/update-project", async (req, res) => {
   }
 });
 
-
 //delete-project
 router.post("/delete-project", async (req, res) => {
   try {
@@ -184,6 +183,32 @@ router.post("/update-contact", async (req, res) => {
     });
   } catch (error) {
     res.status(500).send(error);
+  }
+});
+
+// admin-login
+router.post("/admin-login", async (req, res) => {
+  try {
+    const admin = await Admin.findOne({
+      userName: req.body.userName,
+      password: req.body.password,
+    });
+    // admin.password ="";
+    if (Admin) {
+      res.status(200).send({
+        data: admin,
+        success: true,
+        message: "Login successfully",
+      });
+    } else {
+      res.status(200).send({
+        data:admin,
+        success: false,
+        message: "we do not recognise this admin",
+      });
+    }
+  } catch (error) {
+    res.status(500).send(error.message);
   }
 });
 
